@@ -15,19 +15,33 @@ namespace ConsoleApp1
 
 			int inputNum, inputNum2 = 0;
 			int additionResult, subtractionResult, multiplicationResult, divisionResult, modulusResult = 0;
+			String anotherInput;
 			ArithmeticOperations arithObj;
 
 			Console.WriteLine("\nInput number to process: ");
 			inputNum = Convert.ToInt16(Console.ReadLine());
-			Console.WriteLine("Input another number to process: ");
-			inputNum2 = Convert.ToInt16(Console.ReadLine());
 
-			arithObj = new ArithmeticOperations();
-			additionResult = arithObj.addNums(inputNum, inputNum2);
-			subtractionResult = arithObj.subtract(inputNum, inputNum2);
-			multiplicationResult = arithObj.multiply(inputNum, inputNum2);
-			divisionResult = arithObj.divide(inputNum, inputNum2);
-			modulusResult = arithObj.modulus(inputNum, inputNum2);
+			Console.WriteLine("\nWould you like to provide another input? (y/n): ");
+			anotherInput = Console.ReadLine().ToUpper();
+
+			if (anotherInput == "Y")
+			{
+				Console.WriteLine("Input another number to process: ");
+				inputNum2 = Convert.ToInt16(Console.ReadLine());
+				arithObj = new ArithmeticOperations(inputNum, inputNum2);
+			}
+			else
+			{
+				Console.WriteLine("Processing with previous value...");
+				arithObj = new ArithmeticOperations(inputNum);
+				inputNum2 = arithObj.previousValue(inputNum);
+			}
+
+			additionResult = arithObj.addNums();
+			subtractionResult = arithObj.subtract();
+			multiplicationResult = arithObj.multiply();
+			divisionResult = arithObj.divide();
+			modulusResult = arithObj.modulus();
 
 			Console.WriteLine("\n--------RESULT------------");
 			Console.WriteLine("      Addition: " + inputNum + "+" + inputNum2 + "=" + additionResult);
